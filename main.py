@@ -50,6 +50,16 @@ def main():
         # limit the framerate to 60 FPS
         dt = clock.tick(60) / 1000
 
+        if player.shot_timer > 0:
+            player.shot_timer -= dt
+            if player.shot_timer < 0:
+                player.shot_timer = 0
+
+        for asteroid in asteroids:
+            for shot in shots:
+                if asteroid.collides_with(shot):
+                    asteroid.kill()
+
 
 if __name__ == "__main__":
     main()
