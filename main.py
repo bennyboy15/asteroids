@@ -11,6 +11,9 @@ def main():
     dt = 0 # delta time
     player = Player(SCREEN_WIDTH/2, SCREEN_HEIGHT/2)
     
+    updateable = pygame.sprite.Group(player)
+    drawable = pygame.sprite.Group(player)
+
     # GAME LOOP
     while True:
         # QUIT
@@ -20,8 +23,9 @@ def main():
         
         # BACKGROUND BLACK
         screen.fill(RGB(0,0,0))
-        player.update(dt)
-        player.draw(screen)
+        updateable.update(dt)
+        for item in drawable:
+            item.draw(screen)
         # DISPLAY GAME
         pygame.display.flip()
         dt = game_clock.tick(60)/1000
